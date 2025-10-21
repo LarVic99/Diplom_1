@@ -1,8 +1,10 @@
-from typing import List
+import sys 
+sys.path.append('..')
 
-from praktikum.bun import Bun
-from praktikum.ingredient import Ingredient
-from praktikum.ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FILLING
+from typing import List
+from bun import Bun
+from ingredient import Ingredient
+from ingredient_types import INGREDIENT_TYPE_SAUCE, INGREDIENT_TYPE_FILLING
 
 
 class Database:
