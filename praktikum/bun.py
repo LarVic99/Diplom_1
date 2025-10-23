@@ -1,6 +1,3 @@
-import sys 
-sys.path.append('..')
-
 class Bun:
     """
     Модель булочки для бургера.

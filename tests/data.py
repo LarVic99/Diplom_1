@@ -1,5 +1,5 @@
-import sys 
-sys.path.append('..')
+import sys
+import os
 from unittest.mock import Mock
 
 class BunsWithIngred:
@@ -27,11 +27,27 @@ class BunsWithIngred:
     mock_ingredients.append(mock_ingredient1)
     mock_ingredients.append(mock_ingredient2)
 
-    # Вывод сформированного рецепта для 1 булки и 1 ингредиента
     @staticmethod
-    def get_my_receipt(bun, ingredient):
-        my_receipt = f'(==== {bun.get_name()} ====)\n'
-        my_receipt += f'= {str(ingredient.get_type()).lower()} {ingredient.get_name()} =\n'
-        my_receipt += f'(==== {bun.get_name()} ====)\n\n'
-        my_receipt += f'Price: {bun.get_price() * 2 + ingredient.get_price()}'
+    def get_my_receipt(bun, ingredients):
+        # Если передан не список (а одиночный объект), оборачиваем его в список
+        if not isinstance(ingredients, list):
+            ingredients = [ingredients]
+
+        my_receipt = ""
+        total_price = 0
+
+        if bun is not None:
+            my_receipt += f'(==== {bun.get_name()} ====)\n'
+            total_price += bun.get_price() * 2
+
+        for ingredient in ingredients:
+            my_receipt += f'= {str(ingredient.get_type()).lower()} {ingredient.get_name()} =\n'
+            total_price += ingredient.get_price()
+
+        if bun is not None:
+            my_receipt += f'(==== {bun.get_name()} ====)\n\n'
+        else:
+            my_receipt += "\n"
+
+        my_receipt += f'Price: {total_price}'
         return my_receipt
